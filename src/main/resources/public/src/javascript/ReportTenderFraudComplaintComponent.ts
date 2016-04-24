@@ -7,8 +7,12 @@ import {bootstrap} from 'angular2/platform/browser';
 @Component({
     selector: 'report-tender-fraud-complaint',
     'template': `
-    <form class="ui large form segment centered">
+<div class="ui column stackable center page grid" style="margin-top: 5%">
+ <div class="one wide column"></div>
+    <form class="ui large form segment fourteen wide column center aligned">
     <h3 class="ui header">Report suspicious tender fraud</h3>
+    <div class="ui horizontal divider">Your Personal Information</div>
+    <div class="two fields">
      <div class="field">
      <label>Your Full Names</label>
      <input type="text" placeholder="Your full name" [(ngModel)]="tenderFraudComplaint.complaintName" required> 
@@ -17,33 +21,43 @@ import {bootstrap} from 'angular2/platform/browser';
 <label>Your Email Address</label>
 <input type="email" placeholder="email@domain.com" [(ngModel)]="tenderFraudComplaint.complaintEmail">
 </div>
+</div>
+<div class="two fields">
 <div class="field">
 <label>Your Phone Number</label>
 <input type="tel" placeholder="phone number" [(ngModel)]="tenderFraudComplaint.complaintPhone">  
 </div>
 <div class="field">
 <label>Your Id Number</label>
-<input type="text" placeholder="Your Id Or Passport Number" [(ngModel)]="tenderFraudComplaint.complaintId">
+<input type="text" placeholder="Your Id Or Passport Number" [(ngModel)]="tenderFraudComplaint.complainantId">
 </div>
+</div>
+
+<h4 class="ui horizontal divider">Culprit Company Information</h4>
+<div class="two fields">
 <div class="field">
 <label>Priority</label>
-<select [(ngModel)]="tenderFraudComplaint.priority">
+<select class="ui fluid dropdown" [(ngModel)]="tenderFraudComplaint.priority">
 <option *ngFor="#priority of priorities" [value]="priority">{{priority}}</option>
 </select>
 </div>
 <div class="field">
 <label>Offending Company</label>
-<input  type="text" [(ngModel)]="tenderFraudComplaint.offendingCompany"required>
+<input  type="text" [(ngModel)]="tenderFraudComplaint.offendingCompany" placeholder="Offending company" required>
 </div>
+</div>
+
 <div class="field">
 <label>Details Of The Complaint</label>
-<textarea [(ngModel)]="tenderFraudComplaint.complaint"></textarea>
+<textarea [(ngModel)]="tenderFraudComplaint.complaint" placeholder="the gory details of the suspected tender fraud"></textarea>
 </div>
-<div> 
+
+<div class="two buttons"> 
 <button class="ui button secondary right" type="reset">Reset</button>
 <button class="ui button primary right" type="button" (click)="saveFraudComplaint()">Save Complaint</button>
 </div>
 </form>
+</div>
 `
 })
 class ReportTenderFraudComplaintComponent {
