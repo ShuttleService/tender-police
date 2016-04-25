@@ -2,6 +2,7 @@ package org.dough.apps.tenderpolice.domain.model
 
 import groovy.transform.Canonical
 import org.bson.types.ObjectId
+import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 
 /**
@@ -10,6 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document
 @Document
 @Canonical
 class TenderFraudComplaint {
+    @Id
     ObjectId id
     String complainantName
     String offendingCompany
@@ -18,8 +20,14 @@ class TenderFraudComplaint {
     String complainantPhone
     Priority complaintPriority
     String complaint
+    String reference
+
+    public String getReference() {
+        this.id.toString()
+    }
 }
 
-enum Priority {
 
+enum Priority {
+    HIGH, MEDIUM, LOW
 }

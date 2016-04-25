@@ -10,17 +10,26 @@
     <script src="node_modules/rxjs/bundles/Rx.js"></script>
     <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
     <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
-
+    <script src="node_modules/angular2/bundles/http.dev.js"></script>
     <link href="node_modules/semantic-ui/dist/semantic.css" type="text/css" rel="stylesheet">
     <script>
-        System.import('src/javascript/ReportTenderFraudComplaintComponent.js')
+        System.config({
+            packages: {
+                src: {
+                    format: 'register',
+                    defaultExtension: 'js'
+                }
+            }
+        });
+
+        System.import('src/javascript/ReportTenderFraudComplaintComponent')
     </script>
     <style>
         body {
             background-image: linear-gradient(#0e566c, #00b5ad);
         }
 
-        form{
+        form {
             width: 50%;
         }
     </style>

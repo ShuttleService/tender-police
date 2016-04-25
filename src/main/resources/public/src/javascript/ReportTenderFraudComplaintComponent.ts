@@ -1,31 +1,34 @@
 /**
  * Created by zorodzay on 2016/04/24.
  */
-import {Component} from 'angular2/core';
+import {Component, Inject} from 'angular2/core';
 import {bootstrap} from 'angular2/platform/browser';
-
+import {HTTP_PROVIDERS} from 'angular2/http'
+import {TenderFraudComplaintService} from "./TenderFraudComplaintService";
 @Component({
     selector: 'report-tender-fraud-complaint',
+    providers: [TenderFraudComplaintService],
     'template': `
 <div class="ui column stackable center page grid" style="margin-top: 5%">
  <div class="one wide column"></div>
     <form class="ui large form segment fourteen wide column center aligned">
     <h3 class="ui header">Report suspicious tender fraud</h3>
+    <h3 class="ui info message" *ngIf="reference">Complaint successfully saved. Please keep the reference number <span class="ui label">{{reference}}</span> for follow ups.</h3>
     <div class="ui horizontal divider">Your Personal Information</div>
     <div class="two fields">
      <div class="field">
      <label>Your Full Names</label>
-     <input type="text" placeholder="Your full name" [(ngModel)]="tenderFraudComplaint.complaintName" required> 
+     <input type="text" placeholder="Your full name" [(ngModel)]="tenderFraudComplaint.complainantName" required> 
 </div>
 <div class="field">
 <label>Your Email Address</label>
-<input type="email" placeholder="email@domain.com" [(ngModel)]="tenderFraudComplaint.complaintEmail">
+<input type="email" placeholder="email@domain.com" [(ngModel)]="tenderFraudComplaint.complainantEmail">
 </div>
 </div>
 <div class="two fields">
 <div class="field">
 <label>Your Phone Number</label>
-<input type="tel" placeholder="phone number" [(ngModel)]="tenderFraudComplaint.complaintPhone">  
+<input type="tel" placeholder="phone number" [(ngModel)]="tenderFraudComplaint.complainantPhone">  
 </div>
 <div class="field">
 <label>Your Id Number</label>
@@ -37,7 +40,7 @@ import {bootstrap} from 'angular2/platform/browser';
 <div class="two fields">
 <div class="field">
 <label>Priority</label>
-<select class="ui fluid dropdown" [(ngModel)]="tenderFraudComplaint.priority">
+<select class="ui fluid dropdown" [(ngModel)]="tenderFraudComplaint.complaintPriority">
 <option *ngFor="#priority of priorities" [value]="priority">{{priority}}</option>
 </select>
 </div>
@@ -62,11 +65,18 @@ import {bootstrap} from 'angular2/platform/browser';
 })
 class ReportTenderFraudComplaintComponent {
     tenderFraudComplaint:any = {};
-    priorities:String[] = ["High", "Medium", "Low"];
+    priorities:String[] = ["HIGH", "MEDIUM", "LOW"];
+    reference:string;
+
+    constructor(@Inject(TenderFraudComplaintService)private tenderFraudComplaintService:TenderFraudComplaintService){}
 
     saveFraudComplaint():void {
         console.log("Saving complaint", JSON.stringify(this.tenderFraudComplaint));
+       this.tenderFraudComplaintService.save(this.tenderFraudComplaint).subscribe(savedTenderFraudComplain => {
+            console.log("Saved and got id", savedTenderFraudComplain.id);
+            this.reference = savedTenderFraudComplain.reference;
+        })
     }
 }
 
-bootstrap(ReportTenderFraudComplaintComponent, []);
+bootstrap(ReportTenderFraudComplaintComponent, [HTTP_PROVIDERS]);
