@@ -1,12 +1,11 @@
 package org.dough.apps.tenderpolice.domain.model
 
 import org.dough.apps.tenderpolice.App
-import org.dough.apps.tenderpolice.domain.model.TenderFraudComplaint
-import org.dough.apps.tenderpolice.domain.model.TenderFraudComplaintRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
 import spock.lang.Subject
 import spock.lang.Title
+import spock.lang.Unroll
 
 /**
  * Created by zorodzay on 2016/04/21.
@@ -18,6 +17,14 @@ class TenderFraudComplaintRepositorySpec extends spock.lang.Specification {
     @Autowired
     @Subject
     TenderFraudComplaintRepository repository
+    static String complainant = 'some complainant name'
+    static String offendingCompany = 'some offending company'
+    static String complaint = 'some complaint'
+    static String id
+
+    def setup() {
+        repository.deleteAll()
+    }
 
     def 'demonstrate that the repository has been set up correctly by saving a TenderFraudComplaint to the db '() {
         given: 'that we have a certain number of TenderFraudComplaints in the database'
@@ -27,4 +34,28 @@ class TenderFraudComplaintRepositorySpec extends spock.lang.Specification {
         then: 'we should have one more tender fraud complaint in the database'
         repository.count() == numberOfTenderFraudComplains + 1
     }
+
+    @Unroll("should find tenderFraudComplaint with the searchString #searchText")
+    def "find complaints by part string or full string of either complainant's name, offending company, reference, the actual complaint "() {
+        given: "a tender fraud complaint with the given properties"
+        TenderFraudComplaint tenderFraudComplaint = new TenderFraudComplaint(complainantName: complainant, offendingCompany: offendingCompany,
+                complaint: complaint)
+
+        when: 'we save and search for the tender fraud complaint '
+        TenderFraudComplaint savedTenderFraudComplaint = repository.save(tenderFraudComplaint)
+        id = savedTenderFraudComplaint.id.toString()
+
+        then: 'we should get the tender fraud complaint'
+        List<TenderFraudComplaint> foundTenderFraudComplaint = repository.findByComplainantNameLikeOrOffendingCompanyLikeOrComplaintLikeOrIdLike(searchText,
+                searchText, searchText, searchText)
+
+        and: 'the found tender complaint should be the one we are looking for as verified by having the id that we got after saving'
+        id && id.toString() == foundTenderFraudComplaint[0].id.toString()
+
+        where: 'the search text is as below either'
+        searchText << [complainant, complainant.substring(6), complaint, complaint.substring(5), offendingCompany, offendingCompany.substring(7),
+        ]
+
+    }
+
 }

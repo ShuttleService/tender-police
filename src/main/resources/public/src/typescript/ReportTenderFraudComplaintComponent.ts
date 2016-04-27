@@ -1,9 +1,7 @@
 /**
  * Created by zorodzay on 2016/04/24.
  */
-import {Component, Inject} from 'angular2/core';
-import {bootstrap} from 'angular2/platform/browser';
-import {HTTP_PROVIDERS} from 'angular2/http'
+import {Component, Inject} from "angular2/core";
 import {TenderFraudComplaintService} from "./TenderFraudComplaintService";
 @Component({
     selector: 'report-tender-fraud-complaint',
@@ -63,20 +61,18 @@ import {TenderFraudComplaintService} from "./TenderFraudComplaintService";
 </div>
 `
 })
-class ReportTenderFraudComplaintComponent {
+export class ReportTenderFraudComplaintComponent {
     tenderFraudComplaint:any = {};
-    priorities:String[] = ["HIGH", "MEDIUM", "LOW"];
+    priorities:String[] = ["High", "Medium", "Routine"];
     reference:string;
 
-    constructor(@Inject(TenderFraudComplaintService)private tenderFraudComplaintService:TenderFraudComplaintService){}
+    constructor(@Inject(TenderFraudComplaintService)private service:TenderFraudComplaintService){}
 
     saveFraudComplaint():void {
         console.log("Saving complaint", JSON.stringify(this.tenderFraudComplaint));
-       this.tenderFraudComplaintService.save(this.tenderFraudComplaint).subscribe(savedTenderFraudComplain => {
+       this.service.save(this.tenderFraudComplaint).subscribe(savedTenderFraudComplain => {
             console.log("Saved and got id", savedTenderFraudComplain.id);
             this.reference = savedTenderFraudComplain.reference;
         })
     }
 }
-
-bootstrap(ReportTenderFraudComplaintComponent, [HTTP_PROVIDERS]);

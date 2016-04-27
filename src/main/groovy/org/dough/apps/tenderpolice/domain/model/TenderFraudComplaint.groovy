@@ -4,6 +4,7 @@ import groovy.transform.Canonical
 import org.bson.types.ObjectId
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
+import org.springframework.data.rest.core.event.AfterSaveEvent
 
 /**
  * Created by zorodzay on 2016/04/21.
@@ -21,13 +22,17 @@ class TenderFraudComplaint {
     Priority complaintPriority
     String complaint
     String reference
+    Date reportedOn
 
     public String getReference() {
-        this.id.toString()
+        id?.toString()
+    }
+
+    Date getReportedOn() {
+        id?.getDate()
     }
 }
 
-
 enum Priority {
-    HIGH, MEDIUM, LOW
+    High, Medium, Routine
 }

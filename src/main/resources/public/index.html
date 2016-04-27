@@ -2,7 +2,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <html>
 <body>
-<report-tender-fraud-complaint></report-tender-fraud-complaint>
+<tender-police-home></tender-police-home>
 </body>
 <head>
     <title>Tender Police</title>
@@ -11,6 +11,7 @@
     <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
     <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
     <script src="node_modules/angular2/bundles/http.dev.js"></script>
+    <script src="node_modules/angular2/bundles/router.dev.js"></script>
     <link href="node_modules/semantic-ui/dist/semantic.css" type="text/css" rel="stylesheet">
     <script>
         System.config({
@@ -22,11 +23,11 @@
             }
         });
 
-        System.import('src/javascript/ReportTenderFraudComplaintComponent')
+        System.import('src/javascript/TenderPoliceHomeComponent')
     </script>
     <style>
         body {
-            background-image: linear-gradient(#0e566c, #00b5ad);
+            background-image: linear-gradient(red,yellow,black);
         }
 
         form {
