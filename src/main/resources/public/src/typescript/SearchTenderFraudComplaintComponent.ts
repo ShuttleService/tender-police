@@ -6,7 +6,7 @@ import {TenderFraudComplaintService} from './TenderFraudComplaintService'
     selector: 'search-tender-fraud-complaint',
     providers: [TenderFraudComplaintService],
     template: `
-    <div *ngIf="tenderFraudComplaints">
+    <div *ngIf="tenderFraudComplaints && tenderFraudComplaints.length > 0">
     <h4 class="ui header information">Tender fraud complaints matching {{searchText}} </h4>
     <table class="ui celled table">
     <thead>
@@ -31,7 +31,7 @@ import {TenderFraudComplaintService} from './TenderFraudComplaintService'
 </tbody>
 </table>
 </div>
-<h4 *ngIf="!tenderFraudComplaints" class="ui header information">No tender fraud complaints found matching {{searchText}}.</h4>
+<h4 *ngIf="!tenderFraudComplaints || tenderFraudComplaints && tenderFraudComplaints.length == 0" class="ui header information">No tender fraud complaints found matching {{searchText}}.</h4>
 `
 })
 export class SearchTenderFraudComplaintComponent {
