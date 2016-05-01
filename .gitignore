@@ -2,3 +2,5 @@ target
 *.iml
 .idea
 src/main/resources/public/node_modules/
+src/main/resources/public/semantic.json
+src/main/resources/public/semantic/
