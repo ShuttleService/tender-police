@@ -15,7 +15,7 @@ import {SearchTenderFraudComplaintComponent} from "./SearchTenderFraudComplaintC
     <a class="ui item" [routerLink]="['ReportTenderFraudComplaint']">Report A Tender Fraud</a>
     <div class="item">
     <div class="ui icon action input">
-      <input type="text" #searchText placeholder="Search For Tender Fraud Complaint..." (keydown.enter)="searchForTenderFraudComplaint(searchText.value)">
+      <input type="text" #searchText placeholder="Search..." (keydown.enter)="searchForTenderFraudComplaint(searchText.value)">
       <i class="search icon"></i>
     </div>
   </div>
@@ -48,4 +48,4 @@ class TenderPoliceHomeComponent {
     }
 }
 
-bootstrap(TenderPoliceHomeComponent, [HTTP_PROVIDERS, ROUTER_PROVIDERS, provide(APP_BASE_HREF, {useValue: '/'}),provide(LocationStrategy,{useClass:HashLocationStrategy})]);
+bootstrap(TenderPoliceHomeComponent, [HTTP_PROVIDERS, ROUTER_PROVIDERS, provide(APP_BASE_HREF, {useValue: '/'}), provide(LocationStrategy, {useClass: HashLocationStrategy})]);

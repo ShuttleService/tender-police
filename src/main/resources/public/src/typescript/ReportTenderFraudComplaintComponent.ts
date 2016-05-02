@@ -39,7 +39,7 @@ import {TenderFraudComplaintService} from "./TenderFraudComplaintService";
 <div class="field">
 <label>Priority</label>
 <select class="ui fluid dropdown" [(ngModel)]="tenderFraudComplaint.complaintPriority">
-<option *ngFor="#priority of priorities" [value]="priority">{{priority}}</option>
+<option *ngFor="let priority of priorities" [value]="priority">{{priority}}</option>
 </select>
 </div>
 <div class="field">

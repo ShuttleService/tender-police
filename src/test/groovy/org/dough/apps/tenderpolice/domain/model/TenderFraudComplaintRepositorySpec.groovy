@@ -1,5 +1,6 @@
 package org.dough.apps.tenderpolice.domain.model
 
+import org.bson.types.ObjectId
 import org.dough.apps.tenderpolice.App
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
@@ -46,7 +47,7 @@ class TenderFraudComplaintRepositorySpec extends spock.lang.Specification {
         id = savedTenderFraudComplaint.id.toString()
 
         then: 'we should get the tender fraud complaint'
-        List<TenderFraudComplaint> foundTenderFraudComplaint = repository.findByComplainantNameLikeOrOffendingCompanyLikeOrComplaintLikeOrIdLike(searchText,
+        List<TenderFraudComplaint> foundTenderFraudComplaint = repository.findByComplainantNameLikeOrOffendingCompanyLikeOrComplaintLikeOrId(searchText,
                 searchText, searchText, searchText)
 
         and: 'the found tender complaint should be the one we are looking for as verified by having the id that we got after saving'
@@ -58,4 +59,14 @@ class TenderFraudComplaintRepositorySpec extends spock.lang.Specification {
 
     }
 
+    def 'find a complaint by the reference, which in effect is the timestamp for the id'() {
+        given: 'a tender fraud complaint'
+        TenderFraudComplaint tenderFraudComplaint = new TenderFraudComplaint()
+
+        when: 'we save and then search for the saved tender fraud complaint'
+        ObjectId id = repository.save(tenderFraudComplaint).id
+        List<TenderFraudComplaint> actual = repository.findByComplainantNameLikeOrOffendingCompanyLikeOrComplaintLikeOrId(id.toString(),id.toString(),id.toString(),id.toString())
+        then: 'the found tender fraud complaint should be the one saved'
+        actual && actual[0].id == tenderFraudComplaint.id
+    }
 }

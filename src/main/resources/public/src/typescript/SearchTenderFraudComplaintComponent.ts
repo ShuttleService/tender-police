@@ -20,7 +20,7 @@ import {TenderFraudComplaintService} from './TenderFraudComplaintService'
     </tr>
 </thead>
 <tbody>
-<tr *ngFor="#complaint of tenderFraudComplaints">
+<tr *ngFor="let complaint of tenderFraudComplaints">
 <td><div class="ui ribbon label">{{complaint.complaint}}</div></td>
 <td><div class="ui label ribbon">{{complaint.offendingCompany}}</div></td>
 <td><div class="ui label ribbon">{{complaint.complaintPriority}}</div></td>

@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param
  */
 interface TenderFraudComplaintRepository extends PagingAndSortingRepository<TenderFraudComplaint, ObjectId> {
 
-    List<TenderFraudComplaint> findByComplainantNameLikeOrOffendingCompanyLikeOrComplaintLikeOrIdLike(@Param('searchText') String complainant,
+    List<TenderFraudComplaint> findByComplainantNameLikeOrOffendingCompanyLikeOrComplaintLikeOrId(@Param('searchText') String complainant,
                                                                                                       @Param('searchText')String offendingCompany,
                                                                                                       @Param('searchText')String complaint,
                                                                                                       @Param('searchText')String id)

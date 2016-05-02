@@ -23,7 +23,7 @@ export class TenderFraudComplaintService {
     searchTenderFraudComplaints(searchText:string):Observable<any> {
         console.log(`Searching for Tender Fraud Complaint matching ${searchText}. Calling the backend`);
         return this.http.get(TenderFraudComplaintService.ENDPOINT_URL +
-                "/search/findByComplainantNameLikeOrOffendingCompanyLikeOrComplaintLikeOrIdLike?" +
+                "/search/findByComplainantNameLikeOrOffendingCompanyLikeOrComplaintLikeOrId?" +
                 "searchText=" + searchText)
             .map(complaints=>complaints.json()._embedded.tenderFraudComplaints);
     }
