@@ -62,16 +62,17 @@ import {TenderFraudComplaintService} from "./TenderFraudComplaintService";
 `
 })
 export class ReportTenderFraudComplaintComponent {
-    tenderFraudComplaint:any = {};
+    tenderFraudComplaint:any = {complaintPriority:'High'};
     priorities:String[] = ["High", "Medium", "Routine"];
     reference:string;
 
-    constructor(@Inject(TenderFraudComplaintService)private service:TenderFraudComplaintService){}
+    constructor(@Inject(TenderFraudComplaintService) private service:TenderFraudComplaintService) {
+    }
 
     saveFraudComplaint():void {
         console.log("Saving complaint", JSON.stringify(this.tenderFraudComplaint));
-       this.service.save(this.tenderFraudComplaint).subscribe(savedTenderFraudComplain => {
-            console.log("Saved and got id", savedTenderFraudComplain.id);
+        this.service.save(this.tenderFraudComplaint).subscribe(savedTenderFraudComplain => {
+            console.log("Saved and got id:", savedTenderFraudComplain.reference);
             this.reference = savedTenderFraudComplain.reference;
         })
     }
