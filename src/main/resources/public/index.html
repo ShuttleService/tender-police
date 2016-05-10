@@ -6,28 +6,20 @@
 </body>
 <head>
     <title>Tender Police</title>
+    <script src="node_modules/es6-shim/es6-shim.min.js"></script>
+    <script src="node_modules/reflect-metadata/Reflect.js"></script>
+    <script src="node_modules/zone.js/dist/zone.js"></script>
     <script src="node_modules/systemjs/dist/system.src.js"></script>
-    <script src="node_modules/rxjs/bundles/Rx.js"></script>
-    <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
-    <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
-    <script src="node_modules/angular2/bundles/http.dev.js"></script>
-    <script src="node_modules/angular2/bundles/router.dev.js"></script>
+    <script src="systemjs.config.js"></script>
     <link href="node_modules/semantic-ui/dist/semantic.css" type="text/css" rel="stylesheet">
     <script>
-        System.config({
-            packages: {
-                src: {
-                    format: 'register',
-                    defaultExtension: 'js'
-                }
-            }
+        System.import('app/TenderPoliceHomeComponent').catch(function (error) {
+            console.error(error);
         });
-
-        System.import('src/javascript/TenderPoliceHomeComponent')
     </script>
     <style>
         body {
-            background-image: linear-gradient(green,yellow);
+            background-image: linear-gradient(green, yellow);
         }
 
         form {

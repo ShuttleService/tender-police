@@ -6,7 +6,7 @@
     "emitDecoratorMetadata": false,
     "sourceMap": true,
     "moduleResolution": "node",
-    "outDir": "../../../../target/classes/public/src/javascript"
+    "outDir": "../../../../target/classes/public/app"
   },
   "exclude": [
     "node_modules"

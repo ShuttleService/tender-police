@@ -1,13 +1,10 @@
-import {Component, provide, Inject} from "angular2/core";
-import {bootstrap} from "angular2/platform/browser";
-import {
-    RouteConfig, Router, ROUTER_DIRECTIVES, ROUTER_PROVIDERS
-} from "angular2/router";
-import {APP_BASE_HREF, LocationStrategy, HashLocationStrategy} from 'angular2/platform/common'
-import {HTTP_PROVIDERS} from "angular2/http";
+import {Component, provide, Inject} from "@angular/core";
+import {bootstrap} from "@angular/platform-browser-dynamic";
+import {APP_BASE_HREF, LocationStrategy, HashLocationStrategy} from "@angular/common";
+import {HTTP_PROVIDERS} from "@angular/http";
 import {ReportTenderFraudComplaintComponent} from "./ReportTenderFraudComplaintComponent";
 import {SearchTenderFraudComplaintComponent} from "./SearchTenderFraudComplaintComponent";
-
+import {Router, ROUTER_DIRECTIVES, ROUTER_PROVIDERS, RouteConfig} from "@angular/router-deprecated";
 @Component({
     selector: 'tender-police-home',
     directives: [ROUTER_DIRECTIVES],

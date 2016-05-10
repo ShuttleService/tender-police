@@ -1,8 +1,8 @@
 /**
  * Created by zorodzay on 2016/04/25.
  */
-import {Injectable, Inject} from "angular2/core";
-import {Http, Headers} from "angular2/http";
+import {Injectable, Inject} from "@angular/core";
+import {Http, Headers} from "@angular/http";
 import "rxjs/add/operator/map";
 import {Observable} from "rxjs/Observable";
 

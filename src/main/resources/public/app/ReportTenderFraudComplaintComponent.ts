@@ -1,7 +1,7 @@
 /**
  * Created by zorodzay on 2016/04/24.
  */
-import {Component, Inject} from "angular2/core";
+import {Component, Inject} from "@angular/core";
 import {TenderFraudComplaintService} from "./TenderFraudComplaintService";
 @Component({
     selector: 'report-tender-fraud-complaint',
