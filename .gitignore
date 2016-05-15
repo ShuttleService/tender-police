@@ -4,3 +4,4 @@ target
 src/main/resources/public/node_modules/
 src/main/resources/public/semantic.json
 src/main/resources/public/semantic/
+src/main/resources/public/typings
